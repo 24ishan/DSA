@@ -92,7 +92,7 @@ def timer(func):
 @timer
 def slow_function():
     print("going to sleep")
-    time.sleep(1)
+    # time.sleep(1)
     print("sleep done")
     return "Done!"
 
@@ -107,3 +107,24 @@ ended result
 slow_function took 1.0002 seconds
 Done!
 """
+
+print("***********************************************************")
+
+def decorator(dec_arg:str):
+    print("inside decorator",dec_arg)
+    def wrapper(func):
+        print("inside wrapper")
+        def func1(*args,**kwargs):
+            print("inside func1")
+            a = func(*args,**kwargs)
+            return a
+        return func1
+    return wrapper
+
+
+@decorator(dec_arg="dec_arf")
+def mainfunc(main_arg):
+    print("Executing main func",main_arg)
+    return "Done"
+
+print(mainfunc("mai_arg"))
